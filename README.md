@@ -1,5 +1,5 @@
 # TeleportDialog
-A simple teleport dialog. It allows players to teleport to other players of the same side.
+A simple teleport dialog. It allows players to teleport to other alive players of the same side.
 
 
 # How to use
