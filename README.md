@@ -1,7 +1,6 @@
 # TeleportDialog
 A simple teleport dialog. It allows players to teleport to other alive players of the same side.
 
-
 # How to use
 
 1. Copy the `TPD_teleportDialog` folder into your mission folder
