@@ -14,22 +14,24 @@ class CfgFunctions
     tag = "TPD";
     class Initialize
     {
-      file = "teleportDialog";
+      file = "TPD_teleportDialog";
       class teleport;
     };
   };
 };
 
-#include "TPD_teleportDialog\GUI.hpp"
-
 //If these are already present do not add them
 import ctrlListBox;
 import ctrlButton;
 import ctrlStaticTitle;
+import ctrlStaticBackground;
+
+#include "TPD_teleportDialog\GUI.hpp"
 ```
 
-3. Place an object in the editor and give it the variable name `Teleport_Object`
-
-4. Create a file called `initPlayerLocal.sqf` and write the following in it:
+3. (OPTIONAL) Create a file called `initPlayerLocal.sqf` and write the following in it:
 
 ```Teleport_Object addAction ["Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}];```
+
+4. (OPTIONAL) Place an object in the editor and give it the variable name `Teleport_Object`
+
