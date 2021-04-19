@@ -1,10 +1,14 @@
+//GUI and script related macros
+#include "\a3\3DEN\UI\macros.inc"
+
+#define CTRL_DEFAULT_H (SIZE_M * GRID_H)
 #define DIALOG_W 70
 
 class TPD_Teleport
 {
   idd = -1;
   movingenable = 0;
-  onLoad = "[_this select 0, 'onLoad'] spawn compileScript ['teleportDialogue\fn_teleport.sqf']";
+  onLoad = "[_this select 0, 'onLoad'] spawn TPD_fn_teleport";
   class ControlsBackground
   {
     class Background: ctrlStaticBackground
@@ -39,7 +43,7 @@ class TPD_Teleport
       y = 66 * GRID_H;
       w = DIALOG_W / 2 * GRID_W - 2 * GRID_W;
       h = CTRL_DEFAULT_H;
-      onButtonClick = "[_this select 0, 'teleport'] spawn compileScript ['teleportDialogue\fn_teleport.sqf']";
+      onButtonClick = "[_this select 0, 'teleport'] spawn TPD_fn_teleport";
     };
     class Close: Teleport
     {
