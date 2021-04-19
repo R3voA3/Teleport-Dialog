@@ -28,8 +28,9 @@ import ctrlButton;
 import ctrlStaticTitle;
 ```
 
-3. Place an object in the editor and give it the variable name `Teleport_Object`
-
-4. Create a file called `initPlayerLocal.sqf` and write the following in it:
+3. (OPTIONAL) Create a file called `initPlayerLocal.sqf` and write the following in it:
 
 ```Teleport_Object addAction ["Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}];```
+
+4. (OPTIONAL) Place an object in the editor and give it the variable name `Teleport_Object`
+
