@@ -2,11 +2,27 @@
   Author: R3vo
 
   Description:
-  Handles the teleport GUI functionality. Needs to run in scheduled environment.
+  Handles the teleport GUI functionality. Needs to run in scheduled environment. Will also show a global message in side channel.
+  This can be disabled by:
+
+  missionNamespace setVariable ["TDP_GlobalMessage", false, true]
+
+
+  Adding custom locations:
+  Custom locations can be added by defining the variable TDP_CustomLocations globally in missionNamespace.
+
+  Each custom location is an array in format
+  0: STRING - Name displayed in the GUI
+  1: ARRAY ([x, y] or [x, y, z]), OBJECT, GROUP, STRING (marker or variable name containing an object), LOCATION
+  2: ARRAY - (optional, default [1, 1, 1, 1]) Color in format RGBA. Can be used to highlight the entry in the list
+
+  Example:
+  missionNamespace setVariable ["TDP_CustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true]
 
   Parameter(s):
   0: DISPLAY - Teleport GUI
   1: STRING - Mode, either "onLoad" or "teleport"
+  2: ARRAY - Color in format RGBA. Can be used to highlight the entry in the list
 
   Returns:
   -
@@ -20,21 +36,30 @@ params ["_display", "_mode"];
 //Param can be display or control
 if (_display isEqualType controlNull) then {_display = ctrlParent _display};
 private _ctrlLB = LB;
-
 switch (_mode) do
 {
   case "onLoad":
   {
+    private _customLocs = missionNamespace getVariable ["TDP_CustomLocations", []];
     while {!isNull _display} do
     {
       lbClear _ctrlLB;
-      ((units side player) select {alive _x && _x != player && isPlayer _x}) apply
+      ((units side player) select {alive _x && _x != player && !isPlayer _x}) apply
       {
         private _index = _ctrlLB lbAdd name _x;
         _ctrlLB lbSetData [_index, str position _x];
         _ctrlLB lbSetTextRight [_index, format ["(%2 m) - Grid: %1", mapGridPosition _x, round (player distance _x)]];
       };
-      sleep 1;
+      _customLocs apply
+      {
+        _x params ["_name", "_pos", ["_color", [1, 1, 1, 1], [[]], 4]];
+        _pos = _pos call BIS_fnc_position;
+        private _index = _ctrlLB lbAdd _name;
+        _ctrlLB lbSetData [_index, str _pos];
+        _ctrlLB lbSetTextRight [_index, format ["(%2 m) - Grid: %1", mapGridPosition _pos, round (player distance _pos)]];
+        _ctrlLB lbSetColor [_index, _color];
+      };
+      sleep 2;
     };
   };
   case "teleport":
@@ -58,6 +83,9 @@ switch (_mode) do
     2 fadeSound 1;
 
     //MP Message
-    [[side player, "HQ"], format ["%1 arrived in the AO.", name player]] remoteExec ["sideChat"];
+    if (missionNamespace getVariable ["TDP_GlobalMessage", true]) then
+    {
+      [[side player, "HQ"], format ["%1 arrived in the AO.", name player]] remoteExec ["sideChat"];
+    };
   };
 };
