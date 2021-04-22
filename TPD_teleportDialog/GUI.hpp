@@ -8,7 +8,7 @@ class TPD_Teleport
 {
   idd = -1;
   movingenable = 0;
-  onLoad = "[_this select 0, 'onLoad'] spawn TPD_fnc_teleport";
+  onLoad = "['onLoad', nil, _this select 0] spawn TPD_fnc_teleport";
   class ControlsBackground
   {
     class Background: ctrlStaticBackground
@@ -43,7 +43,7 @@ class TPD_Teleport
       y = 66 * GRID_H;
       w = DIALOG_W / 2 * GRID_W - 2 * GRID_W;
       h = CTRL_DEFAULT_H;
-      onButtonClick = "[_this select 0, 'teleport'] spawn TPD_fnc_teleport";
+      onButtonClick = "['teleport', nil, _this select 0] spawn TPD_fnc_teleport";
     };
     class Close: Teleport
     {
