@@ -49,7 +49,7 @@ switch (_mode) do
     while {!isNull _display} do
     {
       lbClear _ctrlLB;
-      ((units side player) select {alive _x && _x != player && !isPlayer _x}) apply
+      ((units side player) select {alive _x && _x != player && isPlayer _x}) apply
       {
         private _index = _ctrlLB lbAdd name _x;
         _ctrlLB lbSetData [_index, str position _x];
