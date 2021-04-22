@@ -5,7 +5,7 @@
   Handles the teleport GUI functionality. Needs to run in scheduled environment. Will also show a global message in side channel.
 
   Parameter(s):
-  
+
   0: STRING - Mode, can be:
     "onLoad" (Internal use)
     "teleport" (Internal use)
@@ -18,7 +18,7 @@
       1: ARRAY ([x, y] or [x, y, z]), OBJECT, GROUP, STRING (marker or variable name containing an object), LOCATION
       2: ARRAY - (optional, default [1, 1, 1, 1]) Color in format RGBA. Can be used to highlight the entry in the list
 
-    
+
   2: ARRAY, BOOLEAN - Parameters according to mode
   3: DISPLAY - Teleport GUI (internal only)
 
@@ -113,5 +113,17 @@ switch (_mode) do
       [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}, nil, 6, true, true, "", "true", 4]]
       remoteExec ["addAction", 0, true];
     };
+  };
+  case "previewPosition":
+  {
+    //Param can be display or control
+    if (_display isEqualType controlNull) then {_display = ctrlParent _display};
+    private _ctrlLB = LB;
+    private _newPos = LB lbData (lbCurSel LB);s
+    //Exit if nothing was selected or position could not be retrieved
+    if (_newPos == "") exitWith {};
+    _newPos = parseSimpleArray _newPos;
+    openMap true;
+    [2, 0.05, _newPos] call BIS_fnc_mapAnimAdd;
   };
 };
