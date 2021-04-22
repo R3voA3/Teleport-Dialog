@@ -3,27 +3,29 @@
 
 #define CTRL_DEFAULT_H (SIZE_M * GRID_H)
 #define DIALOG_W 80
+#define DIALOG_Y (safezoneY + 2 * CTRL_DEFAULT_H)
 
 class TPD_Teleport
 {
   idd = -1;
   movingenable = 0;
-  onLoad = "['onLoad', nil, _this select 0] spawn TPD_fnc_teleport";
+  onLoad = "uiNamespace setVariable ['TPD_Display', _this select 0];['onLoad', nil, _this select 0] spawn TPD_fnc_teleport";
   class ControlsBackground
   {
-    class Background: ctrlStaticBackground
-    {
-      x = 0.5 - DIALOG_W / 2 * GRID_W;
-      y = CTRL_DEFAULT_H;
-      w = DIALOG_W * GRID_W;
-      h = 67 * GRID_H;
-    };
-    class Headline: ctrlStaticTitle
+   class Headline: ctrlStaticTitle
     {
       text = "$STR_DN_LOCATIONS";
       x = 0.5 - DIALOG_W / 2 * GRID_W;
+      y = DIALOG_Y;
       w = DIALOG_W * GRID_W;
       h = CTRL_DEFAULT_H;
+    };
+    class Background: ctrlStaticBackground
+    {
+      x = 0.5 - DIALOG_W / 2 * GRID_W;
+      y = DIALOG_Y + CTRL_DEFAULT_H;
+      w = DIALOG_W * GRID_W;
+      h = 67 * GRID_H;
     };
    };
    class Controls
@@ -32,7 +34,7 @@ class TPD_Teleport
     {
       idc = 10;
       x = 0.5 - DIALOG_W / 2 * GRID_W + GRID_W;
-      y = CTRL_DEFAULT_H + GRID_H;
+      y = DIALOG_Y + CTRL_DEFAULT_H + GRID_H;
       w = DIALOG_W * GRID_W - 2 * GRID_W;
       h = 59 * GRID_H;
     };
@@ -40,7 +42,7 @@ class TPD_Teleport
     {
       text = "$STR_STATE_MOVE";
       x = 0.5 - DIALOG_W / 2 * GRID_W + GRID_W;
-      y = 66 * GRID_H;
+      y = DIALOG_Y + 66 * GRID_H;
       w = DIALOG_W / 3 * GRID_W - 2 * GRID_W;
       h = CTRL_DEFAULT_H;
       onButtonClick = "['teleport', nil, _this select 0] spawn TPD_fnc_teleport";
