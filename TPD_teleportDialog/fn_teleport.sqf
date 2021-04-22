@@ -17,8 +17,7 @@
       1: ARRAY ([x, y] or [x, y, z]), OBJECT, GROUP, STRING (marker or variable name containing an object), LOCATION
       2: ARRAY - (optional, default [1, 1, 1, 1]) Color in format RGBA. Can be used to highlight the entry in the list
 
-      Example:
-      ["TDP_CustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call
+    "addActions" - Will add actions to given objects globally
 
   2: ARRAY - Color in format RGBA. Can be used to highlight the entry in the list
   3: ARRAY, BOOLEAN - Parameters according to mode
@@ -30,20 +29,22 @@
   ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call TPD_fnc_teleport; // Set custom locations
 
   ["enableGlobalMessage", false, true] call TPD_fnc_teleport; // Disable global message
+
+  ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
 */
 
 #define LB (_display displayCtrl 10)
 
 disableSerialization;
-params ["_display", "_mode", "_parameters"];
+params ["_mode", "_parameters", "_display"];
 
-//Param can be display or control
-if (_display isEqualType controlNull) then {_display = ctrlParent _display};
-private _ctrlLB = LB;
 switch (_mode) do
 {
   case "onLoad":
   {
+    //Param can be display or control
+    if (_display isEqualType controlNull) then {_display = ctrlParent _display};
+    private _ctrlLB = LB;
     private _customLocs = missionNamespace getVariable ["TDP_CustomLocations", []];
     while {!isNull _display} do
     {
@@ -68,6 +69,9 @@ switch (_mode) do
   };
   case "teleport":
   {
+    //Param can be display or control
+    if (_display isEqualType controlNull) then {_display = ctrlParent _display};
+    private _ctrlLB = LB;
     private _newPos = LB lbData (lbCurSel LB);
 
     //Exit if nothing was selected or position could not be retrieved
@@ -94,10 +98,20 @@ switch (_mode) do
   };
   case "enableGlobalMessage":
   {
+    if !(_parameters isEqualType true) exitWith {diag_log "TPD: Global message state could not be set. Only pass BOOLEAN to the function!"};
     missionNamespace setVariable ["TDP_EnableGlobalMessage", _parameters, true];
   };
   case "setCustomLocations":
   {
     missionNamespace setVariable ["TDP_CustomLocations", _parameters, true];
+  };
+  case "addActions":
+  {
+    if !(_parameters isEqualTypeAll objNull) exitWith {diag_log "TPD: Actions could not be added. Only pass objects to the function!"};
+    _parameters apply
+    {
+      [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}, nil, 6, true, true, "", "true", 4]]
+      remoteExec ["addAction", 0, true];
+    };
   };
 };
