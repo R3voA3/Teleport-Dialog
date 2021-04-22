@@ -47,39 +47,5 @@ import ctrlStaticBackground;
 4. Place two objects in the editor and give them the variable names *TPD_1* and *MHQ*
 
 # Function Description and Customisation
-```
-/*
-  Author: R3vo
 
-  Description:
-  Handles the teleport GUI functionality. Needs to run in scheduled environment. Will also show a global message in side channel.
-
-  Parameter(s):
-  
-  0: STRING - Mode, can be:
-    "onLoad" (Internal use)
-    "teleport" (Internal use)
-    "disableGlobalMessage" - Disable or enable global message
-    "addActions" - Will add actions to given objects globally
-    "setCustomLocations" - Set the custom locations.
-
-      Each custom location is an array in format
-      0: STRING - Name displayed in the GUI
-      1: ARRAY ([x, y] or [x, y, z]), OBJECT, GROUP, STRING (marker or variable name containing an object), LOCATION
-      2: ARRAY - (optional, default [1, 1, 1, 1]) Color in format RGBA. Can be used to highlight the entry in the list
-
-    
-  2: ARRAY, BOOLEAN - Parameters according to mode
-  3: DISPLAY - Teleport GUI (internal only)
-
-  Returns:
-  -
-
-  Examples:
-  ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
-
-  ["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
-
-  ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
-*/
-```
+See https://github.com/R3voA3/Arma-3-Teleport-Dialog/blob/cec9852f2ba53800465620f6af04ddf146753404/TPD_teleportDialog/fn_teleport.sqf#L1
