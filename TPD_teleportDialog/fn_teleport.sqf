@@ -26,9 +26,9 @@
   -
 
   Examples:
-  ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call TPD_fnc_teleport; // Set custom locations
+  ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
 
-  ["enableGlobalMessage", false, true] call TPD_fnc_teleport; // Disable global message
+  ["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 
   ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
 */
@@ -49,7 +49,7 @@ switch (_mode) do
     while {!isNull _display} do
     {
       lbClear _ctrlLB;
-      ((units side player) select {alive _x && _x != player && isPlayer _x}) apply
+      ((units side player) select {alive _x && _x != player && !isPlayer _x}) apply
       {
         private _index = _ctrlLB lbAdd name _x;
         _ctrlLB lbSetData [_index, str position _x];
