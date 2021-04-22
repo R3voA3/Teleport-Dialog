@@ -52,11 +52,12 @@ import ctrlStaticBackground;
   Handles the teleport GUI functionality. Needs to run in scheduled environment. Will also show a global message in side channel.
 
   Parameter(s):
-  0: DISPLAY - Teleport GUI
-  1: STRING - Mode, can be:
+  
+  0: STRING - Mode, can be:
     "onLoad" (Internal use)
     "teleport" (Internal use)
     "disableGlobalMessage" - Disable or enable global message
+    "addActions" - Will add actions to given objects globally
     "setCustomLocations" - Set the custom locations.
 
       Each custom location is an array in format
@@ -64,10 +65,9 @@ import ctrlStaticBackground;
       1: ARRAY ([x, y] or [x, y, z]), OBJECT, GROUP, STRING (marker or variable name containing an object), LOCATION
       2: ARRAY - (optional, default [1, 1, 1, 1]) Color in format RGBA. Can be used to highlight the entry in the list
 
-    "addActions" - Will add actions to given objects globally
-
-  2: ARRAY - Color in format RGBA. Can be used to highlight the entry in the list
-  3: ARRAY, BOOLEAN - Parameters according to mode
+    
+  2: ARRAY, BOOLEAN - Parameters according to mode
+  3: DISPLAY - Teleport GUI (internal only)
 
   Returns:
   -
