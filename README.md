@@ -1,5 +1,8 @@
 # Teleport Dialog
-A simple teleport dialog. It allows players to teleport to other alive players of the same side or custom locations.
+A simple teleport dialog which allows players to move instantly to other players or custom locations. Teleportation is not possible if:
+- The side of the player is not equal to the side of the target
+- The target is in a vehicle
+- The target is dead
 
 ![107410_20210422010444_1](https://user-images.githubusercontent.com/17484252/115631821-db576080-a306-11eb-9cff-d6430483cce3.png)
 
