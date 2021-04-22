@@ -31,11 +31,16 @@ import ctrlStaticBackground;
 #include "TPD_teleportDialog\GUI.hpp"
 ```
 
-3. (OPTIONAL) Create a file called `initPlayerLocal.sqf` and write the following in it:
+3. Create a file called `initServer.sqf` and write the following in it:
 
-```Teleport_Object addAction ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}, nil, 6, true, true, "", "true", 4]; ```
+```["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call TPD_fnc_teleport; // Set custom locations
 
-4. (OPTIONAL) Place an object in the editor and give it the variable name `Teleport_Object`
+  ["enableGlobalMessage", false, true] call TPD_fnc_teleport; // Disable global message
+
+  ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
+  ```
+
+4. Place two objects in the editor and give them the variable names *TPD_1* and *MHQ*
 
 # Function Description and Customisation
 ```
