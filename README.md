@@ -34,9 +34,9 @@ import ctrlStaticBackground;
 3. Create a file called `initServer.sqf` and write the following in it:
 
 ```
-["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call TPD_fnc_teleport; // Set custom locations
+["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
 
-["enableGlobalMessage", false, true] call TPD_fnc_teleport; // Disable global message
+["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 
 ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
 ```
@@ -73,9 +73,9 @@ import ctrlStaticBackground;
   -
 
   Examples:
-  ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call TPD_fnc_teleport; // Set custom locations
+  ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
 
-  ["enableGlobalMessage", false, true] call TPD_fnc_teleport; // Disable global message
+  ["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 
   ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
 */
