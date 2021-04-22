@@ -58,8 +58,7 @@ import ctrlStaticBackground;
       1: ARRAY ([x, y] or [x, y, z]), OBJECT, GROUP, STRING (marker or variable name containing an object), LOCATION
       2: ARRAY - (optional, default [1, 1, 1, 1]) Color in format RGBA. Can be used to highlight the entry in the list
 
-      Example:
-      ["TDP_CustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call
+    "addActions" - Will add actions to given objects globally
 
   2: ARRAY - Color in format RGBA. Can be used to highlight the entry in the list
   3: ARRAY, BOOLEAN - Parameters according to mode
@@ -71,5 +70,7 @@ import ctrlStaticBackground;
   ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]], true] call TPD_fnc_teleport; // Set custom locations
 
   ["enableGlobalMessage", false, true] call TPD_fnc_teleport; // Disable global message
+
+  ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
 */
 ```
