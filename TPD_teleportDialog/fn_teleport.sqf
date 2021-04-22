@@ -20,7 +20,6 @@
 
 
   2: ARRAY, BOOLEAN - Parameters according to mode
-  3: DISPLAY - Teleport GUI (internal only)
 
   Returns:
   -
@@ -36,14 +35,13 @@
 #define LB (_display displayCtrl 10)
 
 disableSerialization;
-params ["_mode", "_parameters", "_display"];
+params ["_mode", "_parameters"];
 
 switch (_mode) do
 {
   case "onLoad":
   {
-    //Param can be display or control
-    if (_display isEqualType controlNull) then {_display = ctrlParent _display};
+    private _display = uiNamespace getVariable ["TPD_Display", displayNull];
     private _ctrlLB = LB;
     private _customLocs = missionNamespace getVariable ["TDP_CustomLocations", []];
     while {!isNull _display} do
@@ -69,9 +67,7 @@ switch (_mode) do
   };
   case "teleport":
   {
-    //Param can be display or control
-    if (_display isEqualType controlNull) then {_display = ctrlParent _display};
-    private _ctrlLB = LB;
+    private _display = uiNamespace getVariable ["TPD_Display", displayNull];
     private _newPos = LB lbData (lbCurSel LB);
 
     //Exit if nothing was selected or position could not be retrieved
@@ -116,10 +112,9 @@ switch (_mode) do
   };
   case "previewPosition":
   {
-    //Param can be display or control
-    if (_display isEqualType controlNull) then {_display = ctrlParent _display};
-    private _ctrlLB = LB;
-    private _newPos = LB lbData (lbCurSel LB);s
+    private _display = uiNamespace getVariable ["TPD_Display", displayNull];
+    private _newPos = LB lbData (lbCurSel LB);
+
     //Exit if nothing was selected or position could not be retrieved
     if (_newPos == "") exitWith {};
     _newPos = parseSimpleArray _newPos;
