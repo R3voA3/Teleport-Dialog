@@ -8,3 +8,4 @@
 - List now also displays the distance
 - Added the ability to create custom locations
 - Easier setup of teleport actions via function
+- Teleportation to players which are in a vehicle is not possible anymore

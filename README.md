@@ -6,9 +6,7 @@ A simple teleport dialog which allows players to move instantly to other players
 
 ![107410_20210422010444_1](https://user-images.githubusercontent.com/17484252/115631821-db576080-a306-11eb-9cff-d6430483cce3.png)
 
-
 # Installation
-
 1. Copy the `TPD_teleportDialog` folder into your mission folder
 2. Copy the following into your `description.ext`:
 ```
@@ -47,7 +45,4 @@ import ctrlStaticBackground;
 4. Place two objects in the editor and give them the variable names *TPD_1* and *MHQ*
 
 # Function Description and Customisation
-
-
-
 See [fn_teleport.sqf](https://github.com/R3voA3/Arma-3-Teleport-Dialog/blob/cec9852f2ba53800465620f6af04ddf146753404/TPD_teleportDialog/fn_teleport.sqf#L1)
