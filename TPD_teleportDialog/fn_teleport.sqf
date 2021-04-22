@@ -9,8 +9,8 @@
   0: STRING - Mode, can be:
     "onLoad" (Internal use)
     "teleport" (Internal use)
-    "disableGlobalMessage" - Disable or enable global message
-    "addActions" - Will add actions to given objects globally
+    "disableGlobalMessage" - Disable or enable global message, parameter true or false
+    "addActions" - Will add actions to given objects globally, parameters ARRAY of OBJECTs
     "setCustomLocations" - Set the custom locations.
 
       Each custom location is an array in format
@@ -47,7 +47,7 @@ switch (_mode) do
     while {!isNull _display} do
     {
       lbClear _ctrlLB;
-      ((units side player) select {alive _x && _x != player && !isPlayer _x && vehicle _x == _x}) apply
+      ((units side player) select {alive _x && _x != player && isPlayer _x && vehicle _x == _x}) apply
       {
         private _index = _ctrlLB lbAdd name _x;
         _ctrlLB lbSetData [_index, str position _x];
@@ -103,7 +103,6 @@ switch (_mode) do
   };
   case "addActions":
   {
-    if !(_parameters isEqualTypeAll objNull) exitWith {diag_log "TPD: Actions could not be added. Only pass objects to the function!"};
     _parameters apply
     {
       [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}, nil, 6, true, true, "", "true", 4]]
