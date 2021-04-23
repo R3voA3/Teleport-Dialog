@@ -9,8 +9,8 @@
   0: STRING - Mode, can be:
     "onLoad" (Internal use)
     "teleport" (Internal use)
-    "disableGlobalMessage" - Disable or enable global message, parameter true or false
-    "addActions" - Will add actions to given objects globally, parameters ARRAY of OBJECTs
+    "disableGlobalMessage" - Disable or enable global message
+    "addActions" - Will add actions to given objects globally
     "setCustomLocations" - Set the custom locations.
 
       Each custom location is an array in format
@@ -25,11 +25,23 @@
   -
 
   Examples:
-  ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
+  ["setCustomLocations", [["MHQ", MHQ, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
 
   ["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 
   ["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
+
+  [
+    "setCustomLocations",
+    [
+      ["MHQ No. 0", "MHQ_0", [random 1, random 1, random 1, 1]],
+      ["MHQ No. 1", "MHQ_1", [random 1, random 1, random 1, 1]],
+      ["MHQ No. 2", "MHQ_2", [random 1, random 1, random 1, 1]],
+      ["MHQ No. 3", "MHQ_3", [random 1, random 1, random 1, 1]]
+    ]
+  ] call TPD_fnc_teleport; //Add 4 custom locations in form of markers.
+
+
 */
 
 #define LB (_display displayCtrl 10)
@@ -55,7 +67,12 @@ switch (_mode) do
       };
       _customLocs apply
       {
-        _x params ["_name", "_pos", ["_color", [1, 1, 1, 1], [[]], 4]];
+        _x params
+        [
+          ["_name", "", [""]],
+          ["_pos", [0, 0, 0], [objNull, grpNull, locationNull, [], ""]],
+          ["_color", [1, 1, 1, 1], [[]], 4]
+        ];
         _pos = _pos call BIS_fnc_position;
         private _index = _ctrlLB lbAdd _name;
         _ctrlLB lbSetData [_index, str _pos];
@@ -103,6 +120,7 @@ switch (_mode) do
   };
   case "addActions":
   {
+    if !(_parameters isEqualTypeAll objNull) exitWith {diag_log "TPD: Actions could not be added. Only pass objects to the function!"};
     _parameters apply
     {
       [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}, nil, 6, true, true, "", "true", 4]]
