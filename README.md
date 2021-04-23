@@ -4,8 +4,7 @@ A simple teleport dialog which allows players to move instantly to other players
 - The side of the player is not equal to the side of the target
 - The target is in a vehicle
 - The target is dead
-
-![107410_20210422010444_1](https://user-images.githubusercontent.com/17484252/115631821-db576080-a306-11eb-9cff-d6430483cce3.png)
+- 
 ![107410_20210423020907_1](https://user-images.githubusercontent.com/17484252/115799547-05795300-a3d9-11eb-8af2-d46853638dd2.png)
 
 # Installation
