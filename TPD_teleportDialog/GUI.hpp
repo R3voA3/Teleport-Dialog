@@ -49,7 +49,7 @@ class TPD_Teleport
     };
     class Preview: Teleport
     {
-      text = "Preview Pos.";
+      text = "$STR_EDITOR_MENU_FILE_PREVIEW";
       x = 0.5 + DIALOG_W / 3 * GRID_W - DIALOG_W / 2 * GRID_W + GRID_W;
       onButtonClick = "['previewPosition', nil, _this select 0] call TPD_fnc_teleport";
     };
