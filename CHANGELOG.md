@@ -1,3 +1,8 @@
+22.05.2021
+- UI is now fully scripted to make implementation into missions easier
+- CfgFunctions is now a separate files for easier implementation into mission
+- Several tweaks to the function and UI
+
 19.04.2021
 - Merged both functions into one
 - Updated the GUI to new pixelGrid system

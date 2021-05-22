@@ -7,21 +7,13 @@ A simple teleport dialog which allows players to move instantly to other players
 ![107410_20210423020907_1](https://user-images.githubusercontent.com/17484252/115799547-05795300-a3d9-11eb-8af2-d46853638dd2.png)
 
 # Installation
-1. Copy the `TPD_teleportDialog` folder into your mission folder
+1. Copy the `TPD` folder into your mission folder
 2. Copy the following into your `description.ext`:
 ```
 class CfgFunctions
 {
-  #include "TDP\CfgFunctions.hpp"
+  #include "TPD\CfgFunctions.hpp"
 };
-
-//If these are already present do not add them
-import ctrlListBox;
-import ctrlButton;
-import ctrlStaticTitle;
-import ctrlStaticBackground;
-
-#include "TPD\GUI.hpp"
 ```
 
 3. Create a file called `initServer.sqf` and write the following in it:

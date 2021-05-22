@@ -44,14 +44,60 @@
 
 */
 
+#include "\a3\3DEN\UI\macros.inc"
+#define CTRL_H (SIZE_M * GRID_H)
+#define DIALOG_W 80
+#define DIALOG_TOP (safezoneY + 2 * CTRL_H)
 #define LB (_display displayCtrl 10)
 
 disableSerialization;
-params ["_mode", "_parameters"];
+params ["_mode", ["_parameters", []]];
 
 switch (_mode) do
 {
-  case "onLoad":
+  case "createUI":
+  {
+    disableSerialization;
+
+    private _display = (call BIS_fnc_displayMission) createDisplay "RscDisplayEmpty";
+    uiNamespace setVariable ['TPD_Display', _display];
+
+    private _ctrlHeader = _display ctrlCreate ["ctrlStaticTitle", -1];
+    _ctrlHeader ctrlSetText localize "STR_DN_LOCATIONS";
+    _ctrlHeader ctrlSetPosition [0.5 - DIALOG_W / 2 * GRID_W, DIALOG_TOP, DIALOG_W * GRID_W, CTRL_H];
+
+    private _ctrlBackground = _display ctrlCreate ["ctrlStatic", -1];
+    _ctrlHeader ctrlSetPosition [0.5 - DIALOG_W / 2 * GRID_W, DIALOG_TOP + CTRL_H, DIALOG_W * GRID_W, 67 * GRID_H];
+
+    private _ctrlList = _display ctrlCreate ["ctrlListbox", 10];
+    _ctrlList ctrlSetPosition [0.5 - DIALOG_W / 2 * GRID_W + GRID_W, DIALOG_TOP + CTRL_H + GRID_H, DIALOG_W * GRID_H - 2 * GRID_H, 59 * GRID_H];
+
+    private _ctrlTeleport = _display ctrlCreate ["ctrlButton", 10];
+    _ctrlTeleport ctrlSetPosition [0.5 - DIALOG_W / 2 * GRID_W + GRID_W, DIALOG_TOP + CTRL_H + GRID_H, DIALOG_W / 3 * GRID_W - 2 * GRID_W, CTRL_H];
+    _ctrlTeleport ctrlSetText localize "STR_STATE_MOVE";
+
+    _ctrlPreview ctrlAddEventHandler ["ButtonClick",
+    {
+      ["teleport"] call TPD_fnc_teleport;
+    }];
+
+    private _ctrlPreview = _display ctrlCreate ["ctrlButton", 10];
+    _ctrlPreview ctrlSetPosition [0.5 + DIALOG_W / 2 * GRID_W - DIALOG_W / 3 * GRID_W + GRID_W, DIALOG_TOP + CTRL_H + GRID_H, DIALOG_W / 3 * GRID_W - 2 * GRID_W, CTRL_H];
+    _ctrlPreview ctrlSetText localize "STR_EDITOR_MENU_FILE_PREVIEW";
+
+    _ctrlPreview ctrlAddEventHandler ["ButtonClick",
+    {
+      ["previewPosition"] call TPD_fnc_teleport;
+    }];
+
+    private _ctrlClose = _display ctrlCreate ["ctrlButton", 1];
+    _ctrlClose ctrlSetPosition [0.5 + DIALOG_W / 2 * GRID_W - DIALOG_W / 3 * GRID_W + GRID_W, DIALOG_TOP + CTRL_H + GRID_H, DIALOG_W / 3 * GRID_W - 2 * GRID_W, CTRL_H];
+
+    [_ctrlHeader, _ctrlList, _ctrlTeleport, _ctrlPreview, _ctrlClose] apply {_x ctrlCommit 0};
+
+    ["fillUI"] spawn TPD_fnc_teleport;
+  };
+  case "fillUI":
   {
     private _display = uiNamespace getVariable ["TPD_Display", displayNull];
     private _ctrlLB = LB;
@@ -76,7 +122,7 @@ switch (_mode) do
         _pos = _pos call BIS_fnc_position;
         private _index = _ctrlLB lbAdd _name;
         _ctrlLB lbSetData [_index, str _pos];
-        _ctrlLB lbSetTextRight [_index, format ["(%2 m) - Grid: %1", mapGridPosition _pos, round (player distance _pos)]];
+        _ctrlLB lbSetTextRight [_index, format ["%2 m - Grid: %1", mapGridPosition _pos, round (player distance _pos)]];
         _ctrlLB lbSetColor [_index, _color];
       };
       sleep 2;
@@ -123,7 +169,7 @@ switch (_mode) do
     if !(_parameters isEqualTypeAll objNull) exitWith {diag_log "TPD: Actions could not be added. Only pass objects to the function!"};
     _parameters apply
     {
-      [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD_Teleport"}, nil, 6, true, true, "", "true", 4]]
+      [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {["createUI"] call TPD_fnc_teleport}, nil, 6, true, true, "", "true", 4]]
       remoteExec ["addAction", 0, true];
     };
   };

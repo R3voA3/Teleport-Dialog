@@ -9,7 +9,7 @@ class TPD_Teleport
 {
   idd = -1;
   movingenable = 0;
-  onLoad = "uiNamespace setVariable ['TPD_Display', _this select 0];['onLoad', nil, _this select 0] spawn TPD_fnc_teleport";
+  onLoad = "uiNamespace setVariable ['TPD_Display', _this select 0]; ['onLoad', nil, _this select 0] spawn TPD_fnc_teleport";
   class ControlsBackground
   {
    class Headline: ctrlStaticTitle
