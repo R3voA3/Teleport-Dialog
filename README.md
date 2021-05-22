@@ -16,17 +16,17 @@ class CfgFunctions
 };
 ```
 
-3. Create a file called `initServer.sqf` and write the following in it:
+3. Create a file called `initServer.sqf` in your mission root and write the following in it:
 
 ```
 ["setCustomLocations", [["MHQ", MQH, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
 
 ["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 
-["addActions", [TPD_1, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
+["addActions", [TPD, MHQ]] call TPD_fnc_teleport; // Add actions to given objects for all players
 ```
 
-4. Place two objects in the editor and give them the variable names *TPD_1* and *MHQ*
+4. Place two objects in the editor and give them the variable names *TPD* and *MHQ*
 
 # Function Description and Customisation
 See [fn_teleport.sqf](https://github.com/R3voA3/Arma-3-Teleport-Dialog/blob/cec9852f2ba53800465620f6af04ddf146753404/TPD_teleportDialog/fn_teleport.sqf#L1)
