@@ -12,15 +12,7 @@ A simple teleport dialog which allows players to move instantly to other players
 ```
 class CfgFunctions
 {
-  class TPD
-  {
-    tag = "TPD";
-    class Initialize
-    {
-      file = "TPD_teleportDialog";
-      class teleport;
-    };
-  };
+  #include "TDP\CfgFunctions.hpp"
 };
 
 //If these are already present do not add them
@@ -29,7 +21,7 @@ import ctrlButton;
 import ctrlStaticTitle;
 import ctrlStaticBackground;
 
-#include "TPD_teleportDialog\GUI.hpp"
+#include "TPD\GUI.hpp"
 ```
 
 3. Create a file called `initServer.sqf` and write the following in it:
