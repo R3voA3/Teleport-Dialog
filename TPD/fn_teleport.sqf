@@ -149,7 +149,6 @@ switch (_mode) do
     //Exit if nothing was selected or position could not be retrieved
     if (_newPos == "") exitWith {};
     _newPos = parseSimpleArray _newPos;
-
     //Fade out
     _display closeDisplay 0;
     2 fadeSound 0;
