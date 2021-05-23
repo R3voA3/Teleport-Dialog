@@ -10,6 +10,10 @@ A simple teleport dialog which allows players to move instantly to other players
 
 [![Test](http://img.youtube.com/vi/N3OAR9HT3xo/0.jpg)](http://www.youtube.com/watch?v=N3OAR9HT3xo "Video Title")
 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=N3OAR9HT3xo"><img src="https://img.youtube.com/vi/N3OAR9HT3xo/0.jpg" alt="IMAGE ALT TEXT"></a>
+</div>
+
 # Installation
 1. Copy the `TPD` folder into your mission folder
 2. Copy the following into your `description.ext`:
