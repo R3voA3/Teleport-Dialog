@@ -1,10 +1,14 @@
 
+
 # Teleport Dialog
 A simple teleport dialog which allows players to move instantly to other players or custom locations. Teleportation is not possible if:
 - The side of the player is not equal to the side of the target
 - The target is in a vehicle
 - The target is dead
-![107410_20210423020907_1](https://user-images.githubusercontent.com/17484252/115799547-05795300-a3d9-11eb-8af2-d46853638dd2.png)
+
+![107410_20210523122857_1](https://user-images.githubusercontent.com/17484252/119256760-871ff480-bbc2-11eb-8157-782113ad8449.png)
+
+[YouTube Preview](https://youtu.be/98ua3jhYgGQ)
 
 # Installation
 1. Copy the `TPD` folder into your mission folder
