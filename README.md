@@ -1,4 +1,5 @@
 
+
 # Teleport Dialog
 A simple teleport dialog which allows players to move instantly to other players or custom locations. Teleportation is not possible if:
 - The side of the player is not equal to the side of the target
@@ -6,6 +7,8 @@ A simple teleport dialog which allows players to move instantly to other players
 - The target is dead
 
 ![107410_20210523122857_1](https://user-images.githubusercontent.com/17484252/119256760-871ff480-bbc2-11eb-8157-782113ad8449.png)
+
+[![Test](http://img.youtube.com/vi/N3OAR9HT3xo/0.jpg)](http://www.youtube.com/watch?v=N3OAR9HT3xo "Video Title")
 
 # Installation
 1. Copy the `TPD` folder into your mission folder
