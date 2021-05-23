@@ -1,7 +1,12 @@
 22.05.2021
-- UI is now fully scripted to make implementation into missions easier
+~- UI is now fully scripted to make implementation into missions easier~ Not yet. Engine issue with ctrlMap prevents that
 - CfgFunctions is now a separate files for easier implementation into mission
-- Several tweaks to the function and UI
+- Several tweaks to the function and GUI
+- Preview button was removed. Position is now previewed when listbox selection is changed
+- Global messaged will only be shown to players of the same side
+- Global message changed from sideChat to systemChat
+- Teleporting is only possible to units of same side. (Negative rating added to the check)
+- Teleport action will now now longer be added if the object does not exist
 
 19.04.2021
 - Merged both functions into one

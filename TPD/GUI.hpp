@@ -5,11 +5,11 @@
 #define DIALOG_W 80
 #define DIALOG_Y (safezoneY + 2 * CTRL_DEFAULT_H)
 
-class TPD_Teleport
+class TPD
 {
   idd = -1;
   movingenable = 0;
-  onLoad = "uiNamespace setVariable ['TPD_Display', _this select 0]; ['onLoad', nil, _this select 0] spawn TPD_fnc_teleport";
+  onLoad = "uiNamespace setVariable ['TPD_Display', _this select 0]; ['fillGUI'] spawn TPD_fnc_teleport";
   class ControlsBackground
   {
    class Headline: ctrlStaticTitle
@@ -25,7 +25,7 @@ class TPD_Teleport
       x = 0.5 - DIALOG_W / 2 * GRID_W;
       y = DIALOG_Y + CTRL_DEFAULT_H;
       w = DIALOG_W * GRID_W;
-      h = 67 * GRID_H;
+      h = 8 * CTRL_DEFAULT_H - GRID_H;
     };
    };
    class Controls
@@ -36,22 +36,24 @@ class TPD_Teleport
       x = 0.5 - DIALOG_W / 2 * GRID_W + GRID_W;
       y = DIALOG_Y + CTRL_DEFAULT_H + GRID_H;
       w = DIALOG_W * GRID_W - 2 * GRID_W;
-      h = 59 * GRID_H;
+      h = 6 * CTRL_DEFAULT_H;
+      onLBSelChanged = "['previewPosition'] call TPD_fnc_teleport";
+    };
+    class BackgroundButtons: ctrlStaticFooter
+    {
+      x = 0.5 - DIALOG_W / 2 * GRID_W;
+      y = DIALOG_Y + 7 * CTRL_DEFAULT_H + 2 * GRID_H;
+      w = DIALOG_W * GRID_W;
+      h = CTRL_DEFAULT_H + 2 * GRID_H;
     };
     class Teleport: ctrlButton
     {
       text = "$STR_STATE_MOVE";
       x = 0.5 - DIALOG_W / 2 * GRID_W + GRID_W;
-      y = DIALOG_Y + 66 * GRID_H;
+      y = DIALOG_Y + 7 * CTRL_DEFAULT_H + 3 * GRID_H;
       w = DIALOG_W / 3 * GRID_W - 2 * GRID_W;
       h = CTRL_DEFAULT_H;
-      onButtonClick = "['teleport', nil, _this select 0] spawn TPD_fnc_teleport";
-    };
-    class Preview: Teleport
-    {
-      text = "$STR_EDITOR_MENU_FILE_PREVIEW";
-      x = 0.5 + DIALOG_W / 3 * GRID_W - DIALOG_W / 2 * GRID_W + GRID_W;
-      onButtonClick = "['previewPosition', nil, _this select 0] call TPD_fnc_teleport";
+      onButtonClick = "['teleport'] spawn TPD_fnc_teleport";
     };
     class Close: Teleport
     {
@@ -59,6 +61,23 @@ class TPD_Teleport
       text = "$STR_DISP_OPT_CLOSE";
       x = 0.5 + DIALOG_W / 2 * GRID_W - DIALOG_W / 3 * GRID_W + GRID_W;
       onButtonClick = "";
+    };
+    class BackgroundMap: ctrlStaticBackground
+    {
+      text = "$STR_DISP_OPT_CLOSE";
+      x = 0.5 - DIALOG_W / 2 * GRID_W;
+      y = DIALOG_TOP + 8 * CTRL_DEFAULT_H - 2 * GRID_H;
+      w = DIALOG_W * GRID_W;
+      h = 8 * CTRL_DEFAULT_H + 2 * GRID_H;
+    };
+    class Map: ctrlMap
+    {
+      idc= 20;
+      x = 0.5 - DIALOG_W / 2 * GRID_W + GRID_W;
+      y = DIALOG_TOP + 8 * CTRL_DEFAULT_H - GRID_H;
+      w = DIALOG_W * GRID_W - 2 * GRID_W;
+      h = 8 * CTRL_DEFAULT_H;
+      showCountourInterval = 0;
     };
   };
 };
