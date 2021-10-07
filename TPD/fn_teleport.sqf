@@ -53,7 +53,7 @@ params ["_mode", ["_parameters", []]];
 
 switch (_mode) do
 {
-  /* case "createGUI": // Later use if https://feedback.bistudio.com/T158730 gets ever fixed
+  case "createGUI":
   {
     disableSerialization;
 
@@ -72,7 +72,7 @@ switch (_mode) do
 
     _ctrlList ctrlAddEventHandler ["LBSelChanged",
     {
-      ["previewPosition"] call TPD_fnc_teleport;
+      ["previewPosition"] spawn TPD_fnc_teleport;
     }];
 
     private _ctrlButtonBackground = _display ctrlCreate ["ctrlStaticFooter", -1];
@@ -87,15 +87,6 @@ switch (_mode) do
       ["teleport"] spawn TPD_fnc_teleport;
     }];
 
-    private _ctrlPreview = _display ctrlCreate ["ctrlButton", -1];
-    _ctrlPreview ctrlSetPosition [0.5 + DIALOG_W / 3 * GRID_W - DIALOG_W / 2 * GRID_W + GRID_W, DIALOG_TOP + 50 * GRID_H, DIALOG_W / 3 * GRID_W - 2 * GRID_W, CTRL_H];
-    _ctrlPreview ctrlSetText localize "STR_EDITOR_MENU_FILE_PREVIEW";
-
-    _ctrlPreview ctrlAddEventHandler ["ButtonClick",
-    {
-      ["previewPosition"] call TPD_fnc_teleport;
-    }];
-
     private _ctrlClose = _display ctrlCreate ["ctrlButtonClose", 1];
     _ctrlClose ctrlSetPosition [0.5 + DIALOG_W / 2 * GRID_W - DIALOG_W / 3 * GRID_W + GRID_W, DIALOG_TOP + 50 * GRID_H, DIALOG_W / 3 * GRID_W - 2 * GRID_W, CTRL_H];
 
@@ -103,13 +94,12 @@ switch (_mode) do
     _ctrlMapBackground ctrlSetPosition [0.5 - DIALOG_W / 2 * GRID_W, DIALOG_TOP + 57 * GRID_H, DIALOG_W * GRID_W, 62 * GRID_H];
 
     private _ctrlMap = _display ctrlCreate ["RscMapControl", 20]; //Need to use Rsc... here instead of ctrl... because of contourInterval
-    _ctrlMap ctrlSetPosition [0.5 - DIALOG_W / 2 * GRID_W + GRID_W, DIALOG_TOP + 58 * GRID_H, DIALOG_W * GRID_W - 2 * GRID_W, 60 * GRID_H];
-    //_ctrlMap ctrlSetPosition [safeZoneX, safeZoneY, safeZoneW, safeZoneH];
+    _ctrlMap ctrlMapSetPosition [0.5 - DIALOG_W / 2 * GRID_W + GRID_W, DIALOG_TOP + 58 * GRID_H, DIALOG_W * GRID_W - 2 * GRID_W, 60 * GRID_H];
 
-    [_ctrlHeader, _ctrlBackground, _ctrlList, _ctrlTeleport, _ctrlPreview, _ctrlClose, _ctrlButtonBackground, _ctrlMap, _ctrlMapBackground] apply {_x ctrlCommit 0};
+    [_ctrlHeader, _ctrlBackground, _ctrlList, _ctrlTeleport, _ctrlClose, _ctrlButtonBackground, _ctrlMapBackground] apply {_x ctrlCommit 0};
 
-    ["fillUI"] spawn TPD_fnc_teleport;
-  }; */
+    ["fillGUI"] spawn TPD_fnc_teleport;
+  };
   case "fillGUI":
   {
     private _display = uiNamespace getVariable ["TPD_Display", displayNull];
@@ -118,7 +108,7 @@ switch (_mode) do
     while {!isNull _display} do
     {
       lbClear _ctrlLB;
-      ((units playerSide) select {alive _x && _x != player && isPlayer _x && vehicle _x == _x}) apply
+      ((units side player) select {alive _x && _x != player  && isPlayer  _x && vehicle _x == _x}) apply
       {
         private _index = _ctrlLB lbAdd name _x;
         _ctrlLB lbSetData [_index, str position _x];
@@ -128,7 +118,7 @@ switch (_mode) do
       {
         _x params
         [
-          ["_name", "NO NAME DEFINED!", [""]],
+          ["_name", "", [""]],
           ["_pos", [0, 0, 0], [objNull, grpNull, locationNull, [], ""]],
           ["_color", [1, 1, 1, 1], [[]], 4]
         ];
@@ -149,6 +139,7 @@ switch (_mode) do
     //Exit if nothing was selected or position could not be retrieved
     if (_newPos == "") exitWith {};
     _newPos = parseSimpleArray _newPos;
+
     //Fade out
     _display closeDisplay 0;
     2 fadeSound 0;
@@ -181,8 +172,6 @@ switch (_mode) do
     if !(_parameters isEqualTypeAll objNull) exitWith {diag_log "TPD: Actions could not be added. Only pass objects to the function!"};
     _parameters apply
     {
-      /* [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {["createUI"] call TPD_fnc_teleport}, nil, 6, true, true, "", "true", 4]]
-      remoteExec ["addAction", 0, true]; */
       [_x, ["<img image='\a3\modules_f_curator\data\portraitobjectivemove_ca.paa'/> Select Teleport Location", {findDisplay 46 createDisplay "TPD"}, nil, 6, true, true, "", "true", 4]] remoteExec ["addAction", 0, _x];
     };
   };
