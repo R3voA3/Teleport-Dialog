@@ -19,17 +19,6 @@ class CfgFunctions
   #include "TPD\CfgFunctions.hpp"
 };
 
-//If these imports are already present, omit them
-import ctrlListBox;
-import ctrlButton;
-import ctrlStaticTitle;
-import ctrlStaticFooter;
-import ctrlStaticBackground;
-import ctrlMap;
-
-#include "TPD\GUI.hpp"
-```
-
 3. Create a file called `initServer.sqf` in your mission root and write the following in it:
 
 ```
