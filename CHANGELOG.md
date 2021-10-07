@@ -1,5 +1,5 @@
-22.05.2021
-~- UI is now fully scripted to make implementation into missions easier~ Not yet. Engine issue with ctrlMap prevents that
+07.10.2021
+- UI is now fully scripted to make implementation into missions easier~ Not yet. Engine issue with ctrlMap prevents that
 - CfgFunctions is now a separate files for easier implementation into mission
 - Several tweaks to the function and GUI
 - Preview button was removed. Position is now previewed when listbox selection is changed
