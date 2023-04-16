@@ -1,3 +1,6 @@
+16.04.2023
+- Fixed mission function call in addAction
+
 07.10.2021
 - UI is now fully scripted to make implementation into missions easier~ Not yet. Engine issue with ctrlMap prevents that
 - CfgFunctions is now a separate files for easier implementation into mission
