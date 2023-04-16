@@ -13,15 +13,16 @@ A simple teleport dialog which allows players to move instantly to other players
 # Installation
 1. Copy the `TPD` folder into your mission folder
 2. Copy the following into your `description.ext`:
-```
+```c
 class CfgFunctions
 {
   #include "TPD\CfgFunctions.hpp"
 };
+```
 
 3. Create a file called `initServer.sqf` in your mission root and write the following in it:
 
-```
+```sqf
 ["setCustomLocations", [["MHQ", MHQ, [1, 0, 0, 1]]]] call TPD_fnc_teleport; // Set custom locations
 
 ["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
